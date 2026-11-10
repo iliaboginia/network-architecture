@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram id="pbr-wireguard" name="PBR and WireGuard">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1360" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="heading" parent="1" vertex="1" value="Dedicated WAN routing and WireGuard" style="text;html=0;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=30;fontStyle=1;strokeColor=none;fillColor=none;">
+          <mxGeometry as="geometry" x="40" y="15" width="1270" height="50" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" vertex="1" value="Separate Internet egress, shared corporate services and remote access" style="text;html=0;align=left;fontFamily=Arial;fontSize=16;fontColor=#475569;strokeColor=none;fillColor=none;">
+          <mxGeometry as="geometry" x="40" y="55" width="1270" height="30" />
+        </mxCell>
+        <mxCell id="access-zone" parent="1" vertex="1" value="Shared branch access" style="rounded=1;arcSize=12;html=0;align=left;verticalAlign=top;spacingTop=18;spacingLeft=20;fillColor=#f8fafc;strokeColor=#cbd5e1;fontFamily=Arial;fontSize=19;fontStyle=1;">
+          <mxGeometry as="geometry" x="40" y="310" width="340" height="460" />
+        </mxCell>
+        <mxCell id="hq" parent="1" vertex="1" value="Head-office services&#10;&#10;Domain controller&#10;Mail, ticketing and internal portal&#10;Reachable through internal routes" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;fillColor=#eff6ff;strokeColor=#2563eb;strokeWidth=2;">
+          <mxGeometry as="geometry" x="490" y="90" width="360" height="165" />
+        </mxCell>
+        <mxCell id="corporate-wan" parent="1" vertex="1" value="Corporate Internet&#10;&#10;Existing/default connection&#10;Ordinary users" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;fillColor=#eff6ff;strokeColor=#2563eb;strokeWidth=2;">
+          <mxGeometry as="geometry" x="1010" y="80" width="300" height="130" />
+        </mxCell>
+        <mxCell id="dedicated-wan" parent="1" vertex="1" value="Dedicated Internet circuit&#10;&#10;Same ISP, separate connection&#10;Fixed public address&#10;Subsidiary Internet and VPN&#10;No shared-WAN fallback" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;fillColor=#fffbeb;strokeColor=#d97706;strokeWidth=2;">
+          <mxGeometry as="geometry" x="1010" y="300" width="300" height="170" />
+        </mxCell>
+        <mxCell id="gateway" parent="1" vertex="1" value="MikroTik gateway&#10;&#10;Source-based WAN policy&#10;Internal destination exceptions&#10;Separate WireGuard endpoint&#10;Local UDP routing and NAT" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;fillColor=#ffffff;strokeColor=#334155;strokeWidth=2;">
+          <mxGeometry as="geometry" x="500" y="375" width="340" height="180" />
+        </mxCell>
+        <mxCell id="corporate-users" parent="1" vertex="1" value="Corporate users&#10;&#10;Existing/default network" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;fillColor=#ffffff;strokeColor=#64748b;strokeWidth=2;">
+          <mxGeometry as="geometry" x="70" y="370" width="280" height="85" />
+        </mxCell>
+        <mxCell id="subsidiary-users" parent="1" vertex="1" value="Subsidiary users&#10;&#10;Separate subnet and VLAN&#10;Shared physical access layer" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;fillColor=#fffbeb;strokeColor=#d97706;strokeWidth=2;">
+          <mxGeometry as="geometry" x="70" y="490" width="280" height="110" />
+        </mxCell>
+        <mxCell id="access-switch" parent="1" vertex="1" value="Managed access switch&#10;&#10;VLAN-aware uplink" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;fillColor=#ffffff;strokeColor=#64748b;strokeWidth=2;">
+          <mxGeometry as="geometry" x="70" y="650" width="280" height="75" />
+        </mxCell>
+        <mxCell id="remote-client" parent="1" vertex="1" value="WireGuard client&#10;&#10;VPN access to branch LAN&#10;and subsidiary VLAN" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;fillColor=#f0fdfa;strokeColor=#0f766e;strokeWidth=2;">
+          <mxGeometry as="geometry" x="1010" y="610" width="300" height="125" />
+        </mxCell>
+        <mxCell id="access-corporate" parent="1" edge="1" source="corporate-users" target="access-switch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;strokeColor=#64748b;strokeWidth=2.5;endArrow=none;startArrow=none;exitX=1;exitY=0.47;entryX=1;entryY=0.27;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="380" y="410" />
+              <mxPoint x="380" y="670" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="access-subsidiary" parent="1" edge="1" source="subsidiary-users" target="access-switch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;strokeColor=#64748b;strokeWidth=2.5;endArrow=none;startArrow=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="switch-uplink" parent="1" edge="1" source="access-switch" target="gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;strokeColor=#64748b;strokeWidth=2.5;endArrow=none;startArrow=none;exitX=1;exitY=0.67;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="455" y="700" />
+              <mxPoint x="455" y="465" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="internal-routes" parent="1" edge="1" source="gateway" target="hq" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;strokeColor=#2563eb;strokeWidth=2.5;endArrow=block;startArrow=block;exitX=0.5;exitY=0;entryX=0.5;entryY=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="default-wan" parent="1" edge="1" source="gateway" target="corporate-wan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;strokeColor=#2563eb;strokeWidth=2.5;endArrow=block;startArrow=none;exitX=1;exitY=0.194;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="930" y="410" />
+              <mxPoint x="930" y="145" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="policy-wan" parent="1" edge="1" source="gateway" target="dedicated-wan" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;strokeColor=#d97706;strokeWidth=2.5;endArrow=block;startArrow=none;exitX=1;exitY=0.472;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="960" y="460" />
+              <mxPoint x="960" y="385" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wireguard" parent="1" edge="1" source="gateway" target="remote-client" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;strokeColor=#0f766e;strokeWidth=2.5;endArrow=block;startArrow=block;exitX=1;exitY=0.778;entryX=0;entryY=0.5;dashed=1;dashPattern=8 6;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="900" y="515" />
+              <mxPoint x="900" y="672.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uplink-label" parent="1" vertex="1" value="VLAN uplink" style="text;html=0;align=left;fontFamily=Arial;fontSize=14;fontColor=#64748b;strokeColor=none;fillColor=#ffffff;">
+          <mxGeometry as="geometry" x="402" y="600" width="106" height="42" />
+        </mxCell>
+        <mxCell id="internal-label" parent="1" vertex="1" value="Internal services&#10;stay on internal routes" style="text;html=0;align=left;fontFamily=Arial;fontSize=14;fontColor=#2563eb;strokeColor=none;fillColor=#ffffff;">
+          <mxGeometry as="geometry" x="690" y="280" width="220" height="42" />
+        </mxCell>
+        <mxCell id="default-label" parent="1" vertex="1" value="Default WAN" style="text;html=0;align=left;fontFamily=Arial;fontSize=14;fontColor=#2563eb;strokeColor=none;fillColor=#ffffff;">
+          <mxGeometry as="geometry" x="940" y="240" width="200" height="42" />
+        </mxCell>
+        <mxCell id="pbr-label" parent="1" vertex="1" value="PBR / selected subnet" style="text;html=0;align=left;fontFamily=Arial;fontSize=14;fontColor=#d97706;strokeColor=none;fillColor=#ffffff;">
+          <mxGeometry as="geometry" x="850" y="475" width="200" height="42" />
+        </mxCell>
+        <mxCell id="wg-label" parent="1" vertex="1" value="Encrypted UDP&#10;dedicated circuit" style="text;html=0;align=left;fontFamily=Arial;fontSize=14;fontColor=#0f766e;strokeColor=none;fillColor=#ffffff;">
+          <mxGeometry as="geometry" x="915" y="540" width="200" height="42" />
+        </mxCell>
+        <mxCell id="policy-note" parent="1" vertex="1" value="Required outage policy: no external access when the dedicated circuit is unavailable.&#10;Internet traffic must not fall back to the shared WAN. Local destinations follow their internal routing policy." style="rounded=1;html=0;whiteSpace=wrap;align=left;spacingLeft=20;fontFamily=Arial;fontSize=17;fillColor=#fffbeb;strokeColor=#fcd34d;fontColor=#92400e;">
+          <mxGeometry as="geometry" x="40" y="855" width="1270" height="74" />
+        </mxCell>
+        <mxCell id="scope-note" parent="1" vertex="1" value="Anonymised logical view. Device roles and traffic policies are shown; production addresses and keys are omitted." style="text;html=0;align=left;fontFamily=Arial;fontSize=13;fontColor=#64748b;strokeColor=none;fillColor=none;">
+          <mxGeometry as="geometry" x="40" y="942" width="1270" height="30" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

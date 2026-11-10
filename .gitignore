@@ -1,0 +1,9 @@
+backups/
+private/
+*.backup
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+*.log
